@@ -1,1 +1,2 @@
-# ai_research
+# RISE 2025
+## Northeastern University
