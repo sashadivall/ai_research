@@ -6,12 +6,12 @@ Description : A simple call to chatgpt-4
 
 """
 
-import openai
+import myopenai
 import dotenv
 import os
 
 dotenv.load_dotenv()
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = myopenai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 completion = client.chat.completions.create(
     model="gpt-4",

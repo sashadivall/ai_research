@@ -1,5 +1,5 @@
 """
-File: myopenai.py
+File: openai.py
 Description: A simple wrapper for handling a variety of OpenAI API calls
 """
 
