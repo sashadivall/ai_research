@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 import pandas as pd
-from scoring.score import score_application, score_ethics, score_theory
+from scoring.score import score_theory, score_application, score_ethics_intro, score_ethics_course
 
 def parse_args():
     parser = argparse.ArgumentParser(description='argument parser for gpt scoring')
@@ -22,9 +22,10 @@ def read_in_data(dataset_path: Path) -> pd.DataFrame:
 def main(dataset_path: Path):
     data = read_in_data(dataset_path)
     score_theory(data)
-    # score_application(data)
-    # score_ethics(data)
-    # print(data.info())
+    score_application(data)
+    score_ethics_intro(data)
+    score_ethics_course(data)
+    data.to_csv("data/scored_colleges.csv")
 
 if __name__ == "__main__":
     args = parse_args()
