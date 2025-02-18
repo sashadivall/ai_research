@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # Load the CSV file with error handling
-file_path = Path('/Users/mollyvarrenti/Desktop/RISE Materials/scored_colleges.csv')
+file_path = Path('data/scored_colleges.csv')
 df = pd.read_csv(file_path)
 
 # Select the relevant columns
@@ -40,4 +40,6 @@ plt.xticks(rotation=45, ha='right')
 
 # Display the plot
 plt.tight_layout()
+
+plt.savefig("viz/imgs/clustered_bar_chart.png")
 plt.show()
