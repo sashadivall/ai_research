@@ -11,18 +11,24 @@ import plotly.graph_objects as go
 import os
 
 # Load the Excel file
-file_path = '/Users/mollyvarrenti/Desktop/RISE Materials/Boston Colleges_Universities - AI Research .xlsx'
-df = pd.read_excel(file_path, engine='openpyxl')
+file_path = 'data/colleges_data.csv'
+df = pd.read_csv(file_path)
 
 # Ensure all descriptions are strings
 df['Intro to AI Course Description'] = df['Intro to AI Course Description'].astype(str)
 
 # Extract keywords from 'Intro to AI Course Description'
-keywords_to_filter = ['regularization', 'attention', 'cursory', 'rapidly', 'robotics', 'likelihood',
-'automation', 'multivariable', 'understand']
+keywords_to_filter = ["learning", "machine", "artificial", "intelligence", "neural",
+    "processing", "supervised", "unsupervised", "language", "deep",
+    "reinforcement", "natural", "vision", "decision", "bias",
+    "classification", "probability", "inference", "optimization", "network",
+    "theory", "application", "mathematical", "statistical", "computational",
+    "analysis", "modeling", "systems", "principles", "methods", "data",
+    "training", "development", "evaluation", "implementation", "technology",
+    "automation", "reasoning", "cognitive", "performance", "framework"]
 
 df['Keywords'] = df['Intro to AI Course Description'].apply(
-    lambda x: [word for word in x.split() if word.lower() in keywords_to_filter]
+    lambda x: [word.lower() for word in x.split() if word.lower() in keywords_to_filter]
 )
 
 # Flatten the list of keywords and create a unique list of keywords
@@ -58,7 +64,7 @@ fig = go.Figure(data=[go.Sankey(
 fig.update_layout(title_text="Sankey Diagram of Universities and AI Course Keywords", font_size=10)
 
 # Ensure the directory exists
-output_dir = '/Users/mollyvarrenti/Desktop/RISE Materials'
+output_dir = 'sankey_code/imgs'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
