@@ -55,7 +55,7 @@ def main():
         plt.text(row["Theory Score"], row["Application Score"] + 0.1, row["University Abbreviation"], fontsize=9, ha='center')
 
     # Create a legend for the sizes
-    handles, labels = scatter.legend_elements(prop="sizes", alpha=0.6, num=5)
+    handles, labels = scatter.legend_elements(prop="sizes", alpha=0.6, num=5, func=lambda s: s * filtered_data["Undergrad Enrollement"].max() / 100)
     size_legend = plt.legend(handles, labels, loc="lower left", title="Enrollment Size")
     plt.grid(axis="x", linestyle="--", alpha=0.1)
     plt.grid(axis="y", linestyle="--", alpha=0.1)
@@ -77,7 +77,7 @@ def main():
     #     plt.text(row["Ethics Course Breadth Score"], row["Ethics Course Depth Score"] - 0.2, row["University Abbreviation"], fontsize=9, ha='center')
 
     # Create a legend for the sizes
-    handles, labels = scatter2.legend_elements(prop="sizes", alpha=0.6, num=5)
+    handles, labels = scatter2.legend_elements(prop="sizes", alpha=0.6, num=5, func=lambda s: s * filtered_data2["Undergrad Enrollement"].max() / 100)
     size_legend = plt.legend(handles, labels, loc="upper left", title="Enrollment Size")
     plt.grid(axis="x", linestyle="--", alpha=0.1)
     plt.grid(axis="y", linestyle="--", alpha=0.1)
