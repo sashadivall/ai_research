@@ -38,9 +38,55 @@ def main():
 
     # Filter out zero values
     filtered_data = scored_data[(scored_data["Theory Score"] != 0) & (scored_data["Application Score"] != 0)]
+    filtered_data2 = filtered_data[(filtered_data["Ethics Course Breadth Score"] != 0) & (filtered_data["Ethics Course Depth Score"] != 0)]
+    # print(len(filtered_data["Undergrad Enrollement"]))
 
-    dashed_score_plot(filtered_data, "Theory Score", "Application Score", "theory_v_application")
-    dashed_score_plot(filtered_data, "Ethics Score (Intro Course Description)", "Ethics Course Score", "ethics_intro_v_ethics_course")
+    # dashed_score_plot(filtered_data, "Theory Score", "Application Score", "theory_v_application")
+    # dashed_score_plot(filtered_data, "Ethics Score (Intro Course Description)", "Ethics Course Score", "ethics_intro_v_ethics_course")
+
+    scatter = plt.scatter(x="Theory Score", y="Application Score", data=filtered_data, 
+                          s=filtered_data["Undergrad Enrollement"] / filtered_data["Undergrad Enrollement"].max() * 100, 
+                          label="Undergrad Enrollment", color="firebrick")
+    plt.xlim(0, 5)
+    plt.ylim(0, 5)
+
+    # Add labels for each point
+    for i, row in filtered_data.iterrows():
+        plt.text(row["Theory Score"], row["Application Score"] + 0.1, row["University Abbreviation"], fontsize=9, ha='center')
+
+    # Create a legend for the sizes
+    handles, labels = scatter.legend_elements(prop="sizes", alpha=0.6, num=5)
+    size_legend = plt.legend(handles, labels, loc="lower left", title="Enrollment Size")
+    plt.grid(axis="x", linestyle="--", alpha=0.1)
+    plt.grid(axis="y", linestyle="--", alpha=0.1)
+    plt.title("Theory Score vs. Application Score, Intro To AI Course", fontsize=14, fontweight="bold", pad=15)
+    plt.xlabel("Theory Score")
+    plt.ylabel("Application Score")
+    plt.gca().add_artist(size_legend)
+    plt.savefig("viz/imgs/theory_v_application_2.png")
+    plt.show()
+
+    scatter2 = plt.scatter(x="Ethics Course Breadth Score", y="Ethics Course Depth Score", data=filtered_data2, 
+                          s=filtered_data2["Undergrad Enrollement"] / filtered_data2["Undergrad Enrollement"].max() * 100, 
+                          label="Undergrad Enrollment", color="firebrick")
+    plt.xlim(0, 6)
+    plt.ylim(0, 6)
+
+    # Add labels for each point
+    # for i, row in filtered_data.iterrows():
+    #     plt.text(row["Ethics Course Breadth Score"], row["Ethics Course Depth Score"] - 0.2, row["University Abbreviation"], fontsize=9, ha='center')
+
+    # Create a legend for the sizes
+    handles, labels = scatter2.legend_elements(prop="sizes", alpha=0.6, num=5)
+    size_legend = plt.legend(handles, labels, loc="upper left", title="Enrollment Size")
+    plt.grid(axis="x", linestyle="--", alpha=0.1)
+    plt.grid(axis="y", linestyle="--", alpha=0.1)
+    plt.title("Breadth Score vs. Depth Score, AI Ethics Course", fontsize=14, fontweight="bold", pad=15)
+    plt.xlabel("Breadth Score")
+    plt.ylabel("Depth Score")
+    plt.gca().add_artist(size_legend)
+    plt.savefig("viz/imgs/depth_vs_breadth.png")
+    plt.show()
 
 if __name__ == "__main__":
     main()
