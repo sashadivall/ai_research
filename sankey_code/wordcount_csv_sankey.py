@@ -14,7 +14,7 @@ import string
 import plotly.graph_objects as go
 
 # Load the CSV file
-df = pd.read_csv('/Users/mollyvarrenti/Desktop/RISE Materials/scored_colleges.csv')
+df = pd.read_csv('data/scored_colleges.csv')
 
 # Get the 'Intro to AI Course Description' and 'University Name' columns
 descriptions = df['Intro to AI Course Description'].dropna()
@@ -87,7 +87,7 @@ fig.update_layout(
 )
 
 # Save the Sankey diagram as an HTML file in the specified directory
-sankey_html_path = '/Users/mollyvarrenti/Desktop/RISE Materials/sankey_word_counts.html'
+sankey_html_path = 'sankey_code/imgs/sankey_word_counts.html'
 fig.write_html(sankey_html_path)
 
 print(f"Sankey diagram has been saved to {sankey_html_path}.")
