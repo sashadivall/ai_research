@@ -91,8 +91,9 @@ class MyOpenAI:
         response_text = completion.choices[0].message.content
         try:
             scores = json.loads(response_text)  # Convert response to Python list
-            if isinstance(scores, dict) and all(isinstance(x, (int, float)) for x in scores["values"]):
-                return scores["values"]
+            if isinstance(scores, dict):
+                print(scores)
+                return scores["values"], scores["justification"]
             else:
                 raise ValueError("Unexpected response format")
         except json.JSONDecodeError:
