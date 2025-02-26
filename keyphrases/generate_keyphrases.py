@@ -51,7 +51,7 @@ def extract_keyphrases(data: pd.DataFrame) -> None:
         "University Name": data["University Name"],
         "Topic List": results,
     })
-    keyphrases.to_csv("data/college_topics.csv")
+    keyphrases.to_csv("keyphrases/data/college_topics.csv")
     print(f"Topic List Dataframe successfully written.")
 
 def main():
