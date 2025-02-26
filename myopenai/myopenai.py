@@ -100,3 +100,35 @@ class MyOpenAI:
             raise ValueError("Failed to parse LLM response as JSON")
 
 
+    def generate_keyphrases(self, course_descriptions: list, model="chatgpt-4o-latest"):
+        """Generates key words and phrases for each course description"""
+        descriptions_text = "\n\n".join(
+            [f"Course {i+1}: {desc}" for i, desc in enumerate(course_descriptions)]
+        )
+
+        messages = [
+            self.system_message,
+            {
+                "role": "user",
+                "content": descriptions_text
+            }
+        ]
+
+        completion = self.client.chat.completions.create(
+            model=model,
+            messages=messages,
+        )
+
+        # Extract response and parse JSON safely
+        response_text = completion.choices[0].message.content
+        try:
+            scores = json.loads(response_text)  # Convert response to Python list
+            if isinstance(scores, dict):
+                print(scores)
+                return scores["values"]
+            else:
+                raise ValueError("Unexpected response format")
+        except json.JSONDecodeError:
+            raise ValueError("Failed to parse LLM response as JSON")
+
+
