@@ -9,18 +9,18 @@ def vectorize(topics, vocabulary):
     return np.array([1 if term in topics else 0 for term in vocabulary])
 
 def compute_cosine_similarities(data: pd.DataFrame) -> None:
-    data["Topic List"] = data["Topic List"].apply(ast.literal_eval)
+   # data["Topic List Revised"] = data["Topic List Revised"].apply(ast.literal_eval)
     
-    vocabulary = list(set(topic for topics in data["Topic List"] for topic in topics))
+    vocabulary = list(set(topic for topics in data["Topic List Revised"] for topic in topics))
 
-    vectors = data["Topic List"].apply(lambda topics: vectorize(topics, vocabulary))
+    vectors = data["Topic List Revised"].apply(lambda topics: vectorize(topics, vocabulary))
 
     # Compute cosine similarity matrix
     vectors = np.stack(vectors.values)  # Convert list of vectors to a matrix
     cosine_sim_matrix = cosine_similarity(vectors)
 
     plt.figure(figsize=(10, 8))
-    sns.heatmap(cosine_sim_matrix, annot=True, cmap="magma", xticklabels=data["University Abbreviation"], yticklabels=data["University Abbreviation"])
+    sns.heatmap(cosine_sim_matrix, annot=True, cmap="viridis", xticklabels=data["University Abbreviation"], yticklabels=data["University Abbreviation"])
 
     plt.title("Cosine Similarity Between Universities")
     plt.xticks(rotation=45, ha="right")
@@ -30,7 +30,7 @@ def compute_cosine_similarities(data: pd.DataFrame) -> None:
 
 
 def main():
-    data = pd.read_csv('keyphrases/data/college_topics.csv')
+    data = pd.read_csv('keyphrases/data/college_topics_revised.csv')
     data["University Abbreviation"] = [
         "BC", "BU", "Emmanuel", "Harvard", "MIT", "NEU", 
         "Simmons", "Suffolk", "UMB", "WIT"
