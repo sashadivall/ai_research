@@ -22,7 +22,7 @@ def compute_cosine_similarities(data: pd.DataFrame) -> None:
     plt.figure(figsize=(10, 8))
     sns.heatmap(cosine_sim_matrix, annot=True, cmap="viridis", xticklabels=data["University Abbreviation"], yticklabels=data["University Abbreviation"])
 
-    plt.title("Cosine Similarity Between Universities")
+    plt.title("Intro to AI Course Cosine Similarity Based on Topic Vectors​")
     plt.xticks(rotation=45, ha="right")
     plt.yticks(rotation=0)
     plt.savefig("keyphrases/imgs/cosine_similarity.png")

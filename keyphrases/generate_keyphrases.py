@@ -55,7 +55,7 @@ def extract_keyphrases(data: pd.DataFrame) -> None:
     print(f"Topic List Dataframe successfully written.")
 
 def main():
-    colleges_data = pd.read_csv('data/colleges_data.csv')
+    colleges_data = pd.read_csv('data/new_colleges_data.csv')
     colleges_data = colleges_data.dropna(subset=["Intro to AI Course Description"])
     extract_keyphrases(colleges_data)
 

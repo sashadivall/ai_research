@@ -29,6 +29,7 @@ def clean_tokenize(text):
     text is text.translate(str.maketrans('', '', string.punctuation))
     # Tokenize and convert to lower case
     words = text.lower().split()
+    words = [word.strip().replace(",", "") for word in words]
     # Remove stop words
     words = [word for word in words if word not in stop_words]
     return words
@@ -43,6 +44,7 @@ for description in descriptions:
 
 # Convert the word counts to a DataFrame for better visualization
 word_counts_df = pd.DataFrame(word_counter.items(), columns=['Word', 'Count']).sort_values(by='Count', ascending=False)
+print(word_counts_df["Word"])
 
 # Get the top 10 words
 top_words = word_counts_df.head(10)

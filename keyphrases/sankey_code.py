@@ -43,7 +43,11 @@ for i, university in enumerate(university_names):
 
 # Assign colors to nodes
 colors = ['#636EFA'] * len(university_names.unique()) + ['#EF553B'] * (len(labels) - len(university_names.unique()))
+# Identify the index of Northeastern University
+northeastern_index = label_indices.get('Northeastern University')
 
+# Assign colors to links
+link_colors = ['indianred' if source == northeastern_index else 'lightblue' for source in sources]
 # Create the Sankey diagram
 fig = go.Figure(data=[go.Sankey(
     node=dict(
@@ -57,12 +61,14 @@ fig = go.Figure(data=[go.Sankey(
         source=sources,
         target=targets,
         value=values,
-        hoverlabel=dict(bgcolor='white', font_size=12, font_family='Arial')
+        hoverlabel=dict(bgcolor='white', font_size=12, font_family='Arial'),
+        color=link_colors,
+        line=dict(color='darkgrey', width=0.5)
     )
 )])
 
 # Update layout and save the figure
-fig.update_layout(title_text="Enhanced Sankey Diagram of University Names and Topics", font_size=10)
+fig.update_layout(title_text="Enhanced Sankey Diagram of University Names and Topics", font_size=10, font_color="black")
 output_path = 'keyphrases/imgs/sankey_diagram.html'
 fig.write_html(output_path)
 

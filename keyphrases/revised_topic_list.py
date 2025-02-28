@@ -24,55 +24,42 @@ df['Cleaned Topics'] = df['Topic List'].apply(clean_topic_list)
 # Define broad topic categories with expanded topics
 topic_mapping = {
     "machine learning": [
-        "supervised learning", "unsupervised learning", "reinforcement learning", 
-        "deep learning", "computational learning theory", "meta-learning",
-        "instance-based learning", "inductive bias", "overfitting", "regularization",
-        "gradient-based methods", "gradient descent", "boosting",  
-        "transformer architectures"
+        "machine learning", "machine learning techniques", "deep learning", "neural networks", "neural nets",
+        "reinforcement learning", "supervised learning", "unsupervised learning", "learning", "learning paradigms",
+        "classification", "clustering", "support-vector machines", "identification trees", "boosting", "classifiers",
+        "models", "pattern recognition"
     ],
-    "ml techniques": [
-        "support vector machines", "decision trees", "classification", "clustering", 
-        "ensemble methods", "feature space representations", "kernel methods", 
-        "deterministic tasks", "stochastic tasks"
+    "problem solving": [
+        "search", "heuristic search", "constrained search", "constraint propagation", "state-space search methods",
+        "stochastic tasks", "deterministic tasks", "automation", "planning", "problem-solving", "problem-solving paradigms"
     ],
-    "artificial intelligence": [
-        "artificial intelligence", "AI techniques", "automation", "generative AI",
-        "multiagent systems", "automated deduction", "heuristic search", "state-space search methods", "knowledge representation", 
-        "search"
-    ],
-    "game playing": [
-        "game playing", "robotics", "planning"
-    ],
-    "problem solving and decision making": [
-        "problem-solving", "decision-making", 
-    ],
-    "natural language processing": [
-        "natural language processing", "sentiment analysis", "embeddings"
+    "logic and reasoning": [
+        "predicate calculus", "knowledge representation", "ontologies", "semantic networks", "rule chaining",
+        "common-sense reasoning", "uncertain reasoning", "automated deduction", "theorem-proving", "intelligent behavior"
     ],
     "computer vision": [
-        "computer vision", "image classification"
+        "robotics", "computer vision", "perceptual systems", 
     ],
-    "probabilistic methods": [
-        "probabilistic reasoning", "Bayesian approaches", 
-        "hidden Markov models", "maximum likelihood", "uncertain reasoning", "reasoning under uncertainty", "reasoning"
+    "game playing" : [
+        "game playing", "robotic systems", "multiagent systems"
     ],
-    "logic and theorem proving": [
-        "logic", "predicate calculus", "theorem-proving", "graphical models", 
+    "cognition": [
+        "cognitive science", "human cognition", "cognitive biases", "intuition", "creativity"
     ],
-    "neural networks": [
-        "neural networks", "neural-network architectures"
+    "probabilitistc methods": [
+        "statistics", "statistical inference", "business analytics", "big data", "evaluation", "inheritance"
+    ],
+    "natural language processing": [
+        "natural language processing", "natural language", "human computer interfaces"
     ],
     "bias and ethics": [
-        "bias", "human-computer interaction"
-    ],
-    "systems": [
-        "expert systems", "recommender systems", "personalized information filtering", "association",
-        "production rule systems", 
-    ],
-    "analytics and optimization": [
-        "business analytics", "evaluation", "optimization"
+        "equity", "bias"
     ]
 }
+
+colors = ["lightblue"] * 5 + ["indianred"] + ["lightblue"] * 4
+
+
 
 
 # Reverse mapping for quick lookup
@@ -103,9 +90,10 @@ def count_unique_topics(topic_list):
     return len(set(topics))
 
 df['Unique Topic Count'] = df['Topic List Revised'].apply(count_unique_topics)
+df["Color"] = colors
 print(df)
 # Save new CSV to the same directory as the original file
 output_file = os.path.join(os.path.dirname(file_path), 'college_topics_revised.csv')
-df[['University Name', 'Topic List', 'Topic List Revised', 'Unique Topic Count']].to_csv(output_file, index=False)
+df[['University Name', 'Topic List', 'Topic List Revised', 'Unique Topic Count', 'Color']].to_csv(output_file, index=False)
 
 print(f"CSV file saved at: {output_file}")

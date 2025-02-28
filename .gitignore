@@ -8,3 +8,7 @@ __pycache__/
 .DS_Store
 .env
 # Distribution / packaging
+venv/
+sankey/
+settings.json
+*.ipynb
